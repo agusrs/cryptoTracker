@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
+import Http from '../../libs/http'
 
 const CoinsScreen = ({ navigation }) => {
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const getData = () => {
+        const coins = await Http.instance.get("https://api.coinlore.net/api/tickers/")
+    }
 
     const handlePress = () => {
         console.log("Apretado")
