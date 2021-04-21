@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
 import Http from '../../libs/http'
+import CoinsItem from './CoinsItem'
+import Colors from '../../res/colors'
 
 const CoinsScreen = ({ navigation }) => {
+
+    const [coins, setCoins] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         getData()
     }, [])
 
     const getData = () => {
-        const coins = await Http.instance.get("https://api.coinlore.net/api/tickers/")
+        setLoading(true)
+        const res = await Http.instance.get("https://api.coinlore.net/api/tickers/")
+        setLoading(false)
+        setCoins(res.data)
     }
 
     const handlePress = () => {
@@ -19,14 +27,16 @@ const CoinsScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText} >
-                Coins Screen
-            </Text>
-            <Pressable style={styles.btn} onPress={handlePress} >
-                <Text style={styles.btnText} >
-                    Ir a detail
-                </Text>
-            </Pressable>
+            {loading ? 
+                <ActivityIndicator style={styles.loader} color='#fff' size="large" /> :
+                null
+            }
+            <FlatList 
+                data={coins}
+                renderItem={({ item }) => 
+                    <CoinsItem item={item} />
+                }
+            />
         </View>
     )
 }
@@ -34,7 +44,7 @@ const CoinsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "red"
+        backgroundColor: Colors.charade
     },
     titleText: {
         color: "#fff",
@@ -49,6 +59,9 @@ const styles = StyleSheet.create({
     btnText: {
         color: "white",
         textAlign: "center"
+    },
+    loader: {
+        marginTop: 60
     }
 })
 
