@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 
-const CoinsScreen = () => {
+const CoinsScreen = ({ route }) => {
+
+    useEffect(() => {
+        console.log("coin", route.params)
+    }, [])
+
     return (
         <View>
             <Text>

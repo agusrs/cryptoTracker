@@ -20,9 +20,8 @@ const CoinsScreen = ({ navigation }) => {
         setCoins(res.data)
     }
 
-    const handlePress = () => {
-        console.log("Apretado")
-        navigation.navigate('CoinDetail')
+    const handlePress = (coin) => {
+        navigation.navigate('CoinDetail', { coin })
     }
 
     return (
@@ -34,7 +33,7 @@ const CoinsScreen = ({ navigation }) => {
             <FlatList 
                 data={coins}
                 renderItem={({ item }) => 
-                    <CoinsItem item={item} />
+                    <CoinsItem item={item} onPress={() => handlePress(item)} />
                 }
             />
         </View>
