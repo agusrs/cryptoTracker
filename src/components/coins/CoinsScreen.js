@@ -3,10 +3,12 @@ import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-nativ
 import Http from '../../libs/http'
 import CoinsItem from './CoinsItem'
 import Colors from '../../res/colors'
+import CoinsSearch from './CoinsSearch'
 
 const CoinsScreen = ({ navigation }) => {
 
     const [coins, setCoins] = useState([])
+    const [allCoins, setAllCoins] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -18,14 +20,25 @@ const CoinsScreen = ({ navigation }) => {
         const res = await Http.instance.get("https://api.coinlore.net/api/tickers/")
         setLoading(false)
         setCoins(res.data)
+        setAllCoins(res.data)
     }
 
     const handlePress = (coin) => {
         navigation.navigate('CoinDetail', { coin })
     }
 
+    const handleSearch = (query) => {
+        const coinsFiltered = allCoins.filter((coin) => {
+            return coin.name.toLowerCase().includes(query.toLowerCase()) || 
+            coin.symbol.toLowerCase().includes(query.toLowerCase()) 
+        })
+
+        setCoins(coinsFiltered)
+    }
+
     return (
         <View style={styles.container}>
+            <CoinsSearch onChange={handleSearch} />
             {loading ? 
                 <ActivityIndicator style={styles.loader} color='#fff' size="large" /> :
                 null
