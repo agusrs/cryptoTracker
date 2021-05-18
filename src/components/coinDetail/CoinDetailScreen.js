@@ -10,13 +10,13 @@ const CoinsScreen = ({ route, navigation }) => {
     const [markets, setMarkets] = useState([])
 
     useEffect(() => {
-        const { paramsCoin } = route.params
+        const { coin } = route.params
 
-        navigation.setOptions({ title: paramsCoin.symbol })
+        navigation.setOptions({ title: coin.symbol })
 
-        getMarkets(paramsCoin.id)
+        getMarkets(coin.id)
 
-        setCoin(paramsCoin)
+        setCoin(coin)
 
     }, [])
 

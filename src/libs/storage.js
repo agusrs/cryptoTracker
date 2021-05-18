@@ -40,15 +40,14 @@ class Storage {
             throw Error(error);
         }
     };
-}
 
-remove = async (key) => {
-    try {
-        await AsyncStorage.removeItem(key)
-        return true
-    } catch (error) {
-        console.log(error)
-        return false
+    remove = async (key) => {
+        try {
+            await AsyncStorage.removeItem(key)
+            return true
+        } catch (error) {
+            console.log(error)
+            return false
+        }
     }
-}
 }

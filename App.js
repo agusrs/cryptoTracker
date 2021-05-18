@@ -21,7 +21,7 @@ export default function App() {
       >
         <Tabs.Screen
           name="Coins"
-          component={<CoinsStack/>}
+          component={CoinsStack}
           options={{
             tabBarIcon: ({ size, color }) => (
               <Image style={{ tintColor: color, width: size, height: size }} source={require('./src/assets/bank.png')} />
@@ -30,7 +30,7 @@ export default function App() {
         />
         <Tabs.Screen
           name="Favorites"
-          component={<FavoritesStack/>}
+          component={FavoritesStack}
           options={{
             tabBarIcon: ({ size, color }) => (
               <Image style={{ tintColor: color, width: size, height: size }} source={require('./src/assets/star.png')} />

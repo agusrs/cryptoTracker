@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { TextInput, View, Platform, StyleSheet } from 'react-native'
 import { onChange } from 'react-native-reanimated'
 import Colors from '../../res/colors'

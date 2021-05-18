@@ -30,7 +30,7 @@ const CoinsItem = ({ item, onPress }) => {
                     {item.percent_change_1h}
                 </Text>
                 <Image
-                    source={getImageArrow}
+                    source={getImageArrow()}
                     style={styles.imgIcon}
                 />
             </View>
