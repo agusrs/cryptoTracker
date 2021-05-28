@@ -156,6 +156,7 @@ const CoinsScreen = ({ route, navigation }) => {
                 style={styles.flatList}
                 data={markets}
                 horizontal={true}
+                keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => <CoinMarketItem item={item} />}
             />
 
